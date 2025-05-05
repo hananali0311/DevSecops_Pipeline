@@ -9,12 +9,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensures the full history is fetched
 
       - name: Show current directory and files (debug)
         run: |
           pwd
           ls -la
-          ls -la ../
 
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -22,8 +23,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Verify POM file existence
+        run: |
+          if [ -f "/home/runner/work/DevSecops_Pipeline/pom.xml" ]; then echo "pom.xml exists"; else echo "pom.xml does not exist"; fi
+
       - name: SonarCloud Scan
-        run: mvn -f pom.xml sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: |
+          cd /home/runner/work/DevSecops_Pipeline  # Change directory to the location of the pom.xml
+          mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
 # name: Sonar Scan
 
