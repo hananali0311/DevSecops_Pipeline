@@ -22,11 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: SonarCloud Scan
-        run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline \
-                             -Dsonar.organization=hananali0311 \
-                             -Dsonar.host.url=https://sonarcloud.io \
-                             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
+        run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
 
 
