@@ -1,7 +1,7 @@
 name: Sonar Scan
 
 on:
-  workflow_dispatch:  # So you can trigger it manually
+  workflow_call:  # So you can trigger it manually
 
 jobs:
   sonar:
