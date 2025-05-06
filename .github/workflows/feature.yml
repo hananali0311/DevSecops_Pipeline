@@ -47,8 +47,9 @@ jobs:
       - name: Upload Artifact to JFrog via Identity Token
         run: |
           curl -H "Authorization: Bearer ${{ secrets.JFROG_IDENTITY_TOKEN }}" \
-          -T target/myapp.jar \
-          "https://hananali0311.jfrog.io/artifactory/my-repo--libs-release-local/my-java-app/myapp.jar"
+          -T target/*.jar \
+          "https://hananali0311.jfrog.io/artifactory/my-repo--libs-release-local/my-java-app/"
+      
 
 # name: CI Pipeline
 
