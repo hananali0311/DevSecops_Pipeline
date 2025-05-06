@@ -1,37 +1,7 @@
-name: Sonar Scan
-
-on:
-  workflow_call:  # So you can trigger it manually
-
-jobs:
-  sonar:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Required for Sonar to get git history
-
-      - name: Show current directory (pwd)
-        run: pwd
-
-      - name: List files in current directory
-        run: ls -la
-
-      - name: Find pom.xml
-        run: find . -name pom.xml
-
-      - name: Build (compile without tests)
-        run: mvn -f ./pom.xml clean compile
-
-      - name: SonarCloud Scan
-        run: mvn -f ./pom.xml sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-#
-
 # name: Sonar Scan
 
 # on:
-#   workflow_call:
+#   workflow_call:  # So you can trigger it manually
 
 # jobs:
 #   sonar:
@@ -40,17 +10,24 @@ jobs:
 #       - name: Checkout code
 #         uses: actions/checkout@v3
 #         with:
-#           path: DevSecops_Pipeline  # Avoid double folder issue
+#           fetch-depth: 0  # Required for Sonar to get git history
+
+#       - name: Show current directory (pwd)
+#         run: pwd
+
+#       - name: List files in current directory
+#         run: ls -la
+
+#       - name: Find pom.xml
+#         run: find . -name pom.xml
+
+#       - name: Build (compile without tests)
+#         run: mvn -f ./pom.xml clean compile
 
 #       - name: SonarCloud Scan
-#         working-directory: ./DevSecops_Pipeline  # Go inside the folder where pom.xml is
-#         run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+#         run: mvn -f ./pom.xml sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+# #
 
-
-
-
-
-# # # .github/workflows/sonar.yml
 # # name: Sonar Scan
 
 # # on:
@@ -60,10 +37,33 @@ jobs:
 # #   sonar:
 # #     runs-on: ubuntu-latest
 # #     steps:
+# #       - name: Checkout code
+# #         uses: actions/checkout@v3
+# #         with:
+# #           path: DevSecops_Pipeline  # Avoid double folder issue
+
 # #       - name: SonarCloud Scan
-# #         run: mvn sonar:sonar \
-# #           -Dsonar.projectKey=hananali0311_DevSecops_Pipeline \
-# #           -Dsonar.organization=hananali0311 \
-# #           -Dsonar.host.url=https://sonarcloud.io \
-# #           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+# #         working-directory: ./DevSecops_Pipeline  # Go inside the folder where pom.xml is
+# #         run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+
+
+
+
+# # # # .github/workflows/sonar.yml
+# # # name: Sonar Scan
+
+# # # on:
+# # #   workflow_call:
+
+# # # jobs:
+# # #   sonar:
+# # #     runs-on: ubuntu-latest
+# # #     steps:
+# # #       - name: SonarCloud Scan
+# # #         run: mvn sonar:sonar \
+# # #           -Dsonar.projectKey=hananali0311_DevSecops_Pipeline \
+# # #           -Dsonar.organization=hananali0311 \
+# # #           -Dsonar.host.url=https://sonarcloud.io \
+# # #           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
