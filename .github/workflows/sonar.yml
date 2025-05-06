@@ -1,7 +1,7 @@
 name: Sonar Scan
 
 on:
-  workflow_call:
+  workflow_dispatch:  # So you can trigger it manually
 
 jobs:
   sonar:
@@ -9,12 +9,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Required for Sonar to get git history
+
+      - name: Show current directory (pwd)
+        run: pwd
+
+      - name: List files in current directory
+        run: ls -la
+
+      - name: Find pom.xml
+        run: find . -name pom.xml
 
       - name: Build (compile without tests)
-        run: mvn clean compile
+        run: mvn -f ./pom.xml clean compile
 
       - name: SonarCloud Scan
-        run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -f ./pom.xml sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
 
 # name: Sonar Scan
