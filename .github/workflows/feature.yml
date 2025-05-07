@@ -78,7 +78,7 @@ jobs:
           docker build -t hananali0311/spring-petclinic:latest .
 
 
-
+# secrets added 
 
 
 # ### adding the pipeline .. till jfrog.........
