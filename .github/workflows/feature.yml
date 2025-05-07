@@ -76,6 +76,10 @@ jobs:
         run: |
           docker --version  # Check Docker version
           docker build -t hananali0311/spring-petclinic:latest .
+      # Step 12: Push Docker Image to Docker Hub
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push hananali0311/spring-petclinic:latest
 
 
 # secrets added 
