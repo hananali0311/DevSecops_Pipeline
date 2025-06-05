@@ -5,39 +5,16 @@ on:
 
 jobs:
   sonar:
-    runs-on: ubuntu-latest  # GitHub Actions runner (Ubuntu, not Windows EC2)
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up JDK 17  # Or your required Java version
-        uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'adopt'
+          path: DevSecops_Pipeline  # Avoid double folder issue
 
       - name: SonarCloud Scan
-        working-directory: ./DevSecops_Pipeline  # Tells runner to go inside your project directory
+        working-directory: ./DevSecops_Pipeline  # Go inside the folder where pom.xml is
         run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-
-# name: Sonar Scan
-
-# on:
-#   workflow_call:
-
-# jobs:
-#   sonar:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3
-#         with:
-#           path: DevSecops_Pipeline  # Avoid double folder issue
-
-#       - name: SonarCloud Scan
-#         working-directory: ./DevSecops_Pipeline  # Go inside the folder where pom.xml is
-#         run: mvn sonar:sonar -Dsonar.projectKey=hananali0311_DevSecops_Pipeline -Dsonar.organization=hananali0311 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
 
 
